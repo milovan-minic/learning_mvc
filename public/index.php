@@ -6,7 +6,8 @@
  *  PHP version 5.5.9
  */
 
-//echo 'Requested URL = "' . $_SERVER['QUERY_STRING'] . '"';
+// Require the controller class
+require '../App/Controllers/Posts.php';
 
 /**
  *  Routing
@@ -30,10 +31,12 @@ $router->add('{controller}/{id:\d+}/{action}');
 //echo '</pre>';
 
 // Match the requested route
-$url = $_SERVER['QUERY_STRING'];
+//$url = $_SERVER['QUERY_STRING'];
 
-if($router->match($url)) {
-    var_dump($router->getParams());
-} else {
-    echo 'No route found for URL "' . $url . '"';
-}
+//if($router->match($url)) {
+//    var_dump($router->getParams());
+//} else {
+//    echo 'No route found for URL "' . $url . '"';
+//}
+
+$router->dispatch($_SERVER['QUERY_STRING']);
