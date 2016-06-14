@@ -1,5 +1,7 @@
 <?php
 
+namespace Core;
+
 /**
  *  Router
  *
@@ -10,9 +12,17 @@ class Router
 {
     /**
      * Associative array of routes (the routing table)
+     *
      * @var array
      */
     protected $_routes = [];
+
+    /**
+     * Parameters from the matched routes
+     *
+     * @var array
+     */
+    protected $_params = [];
 
     /**
      * Add the route to the routing table
@@ -61,7 +71,7 @@ class Router
     {
 //        foreach ($this->_routes as $route => $params) {
 //            if($url == $route) {
-//                $this->params = $params;
+//                $this->_params = $params;
 //                return true;
 //            }
 //        }
@@ -79,7 +89,7 @@ class Router
                         $params[$key] = $match;
                     }
                 }
-                $this->params = $params;
+                $this->_params = $params;
                 return true;
             }
         }
@@ -93,7 +103,7 @@ class Router
      */
     public function getParams()
     {
-        return $this->params;
+        return $this->_params;
     }
 
     /**
@@ -107,13 +117,14 @@ class Router
     public function dispatch($url)
     {
         if($this->match($url)) {
-            $controller = $this->params['controller'];
+            $controller = $this->_params['controller'];
             $controller = $this->convertToStudlyCaps($controller);
+            $controller = "App\Controllers\\$controller";
 
             if(class_exists($controller)) {
                 $controllerObject = new $controller();
 
-                $action = $this->params['action'];
+                $action = $this->_params['action'];
                 $action = $this->convertToCamelCase($action);
 
                 if(is_callable([$controllerObject, $action])) {
