@@ -18,6 +18,15 @@ class Home extends \Core\Controller
     protected function before()
     {
         echo '(Before) ';
+
+        /**
+         * By returning false from before method, the originally called method will not be executed.
+         * This is handy to check, for example, if user has been logged in or not, or have
+         * correct permissions.
+         *
+         * Also very useful for authentication.
+         */
+//        return false;
     }
 
     /**
