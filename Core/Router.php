@@ -116,6 +116,8 @@ class Router
      */
     public function dispatch($url)
     {
+        $url = $this->removeQueryStringVariables($url);
+
         if($this->match($url)) {
             $controller = $this->_params['controller'];
             $controller = $this->convertToStudlyCaps($controller);
@@ -164,5 +166,40 @@ class Router
     public function convertToCamelCase($string)
     {
         return lcfirst($this->convertToStudlyCaps($string));
+    }
+
+    /**
+     * ===============================================================================
+     *      URL                     |   $_SERVER['QUERY_STRING']    |   Route
+     * ===============================================================================
+     * localhost                        ''                              ''
+     * localhost/?                      ''                              ''
+     * localhost/?page=1                'page1'                         ''
+     * localhost/posts?page=1           'posts&page=1'                  'posts'
+     * localhost/posts/index            'posts/index'                   'posts/index'
+     * localhost/posts/index?page=1     'posts/index&page=1'            'posts/index'
+     * ===============================================================================
+     *
+     * A URL of the format localhost/?page (one variable name, no value) won't work
+     * however. (NB. The .htaccess file converts the first ? to a & when it's passed
+     * through to the $_SERVER variable).
+     *
+     * @param string $url The full URL
+     *
+     * @return string The URL with the query string variables removed
+     */
+    protected function removeQueryStringVariables($url)
+    {
+        if($url != '') {
+            $parts = explode('&', $url, 2);
+
+            if(strpos($parts[0], '=') === false) {
+                $url = $parts[0];
+            } else {
+                $url = '';
+            }
+        }
+
+        return $url;
     }
 }
