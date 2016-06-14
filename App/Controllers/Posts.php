@@ -8,7 +8,8 @@ namespace App\Controllers;
  *  PHP Version 5.5.9
  */
 
-class Posts {
+class Posts extends \Core\Controller
+{
 
     /**
      *  Show the index page
@@ -18,8 +19,8 @@ class Posts {
     public function index()
     {
         echo 'Hello from index action in the Posts Controller!';
-        echo '<p>Query string parameters: <pre>' .
-            htmlspecialchars(print_r($_GET, true)) . '</pre></p>';
+//        echo '<p>Query string parameters: <pre>' .
+//            htmlspecialchars(print_r($_GET, true)) . '</pre></p>';
     }
 
     /**
@@ -30,5 +31,13 @@ class Posts {
     public function addNew()
     {
         echo 'Hello from addNew action in the Posts Controller!';
+    }
+
+
+    public function edit()
+    {
+        echo 'Hello from the edit action in the Posts controller';
+        echo '<p>Route parameters: <pre>' .
+            htmlspecialchars(print_r($this->_routeParams, true)) . '</pre></p>';
     }
 }
