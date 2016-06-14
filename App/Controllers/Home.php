@@ -11,11 +11,31 @@ namespace App\Controllers;
 class Home extends \Core\Controller
 {
     /**
+     * Before filter
+     *
+     * return void
+     */
+    protected function before()
+    {
+        echo 'Before ';
+    }
+
+    /**
+     * After filter
+     *
+     * return void
+     */
+    protected function after()
+    {
+        echo ' After';
+    }
+
+    /**
      *  Show the index page
      *
      * @return void
      */
-    public function index()
+    public function indexAction()
     {
         echo 'Hello from the index action in the Home controller';
     }
