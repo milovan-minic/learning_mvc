@@ -121,7 +121,8 @@ class Router
         if($this->match($url)) {
             $controller = $this->_params['controller'];
             $controller = $this->convertToStudlyCaps($controller);
-            $controller = "App\Controllers\\$controller";
+//            $controller = "App\Controllers\\$controller";
+            $controller = $this->getNamespace() . $controller;
 
             if(class_exists($controller)) {
                 $controllerObject = new $controller($this->_params);
@@ -201,5 +202,22 @@ class Router
         }
 
         return $url;
+    }
+
+    /**
+     * Get the namespace for the controller class, The namespace defined
+     * in the route parameters is added if present
+     *
+     * @return string The request URL
+     */
+    protected function getNamespace()
+    {
+        $namespace = 'App\Controllers\\';
+
+        if(array_key_exists('namespace', $this->_params)) {
+            $namespace .= $this->_params['namespace'] . '\\';
+        }
+
+        return $namespace;
     }
 }
