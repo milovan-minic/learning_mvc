@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+use \Core\Controller;
 
 /**
  *  Posts Controller
@@ -8,7 +9,7 @@ namespace App\Controllers;
  *  PHP Version 5.5.9
  */
 
-class Posts extends \Core\Controller
+class Posts extends Controller
 {
 
     /**

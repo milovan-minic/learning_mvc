@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+use \Core\Controller;
 
 /**
  *  Home Controller
@@ -8,7 +9,7 @@ namespace App\Controllers;
  *  PHP Version 5.5.9
  */
 
-class Home extends \Core\Controller
+class Home extends Controller
 {
     /**
      * Before filter
