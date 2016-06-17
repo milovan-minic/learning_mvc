@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Controllers;
+
 use \Core\Controller;
+use \Core\View;
 
 /**
  *  Home Controller
@@ -18,7 +20,7 @@ class Home extends Controller
      */
     protected function before()
     {
-        echo '(Before) ';
+//        echo '(Before) ';
 
         /**
          * By returning false from before method, the originally called method will not be executed.
@@ -37,7 +39,7 @@ class Home extends Controller
      */
     protected function after()
     {
-        echo ' (After)';
+//        echo ' (After)';
     }
 
     /**
@@ -47,6 +49,7 @@ class Home extends Controller
      */
     public function indexAction()
     {
-        echo 'Hello from the index action in the Home controller';
+//        echo 'Hello from the index action in the Home controller';
+        View::render('Home/index.php');
     }
 }
