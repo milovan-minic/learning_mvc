@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Controllers;
+
 use \Core\Controller;
+use \Core\View;
 
 /**
  *  Posts Controller
@@ -19,9 +21,8 @@ class Posts extends Controller
      */
     public function indexAction()
     {
-        echo 'Hello from index action in the Posts Controller!';
-//        echo '<p>Query string parameters: <pre>' .
-//            htmlspecialchars(print_r($_GET, true)) . '</pre></p>';
+//        echo 'Hello from index action in the Posts Controller!';
+        View::renderTemplate('Posts/index.html');
     }
 
     /**

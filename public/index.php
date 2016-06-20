@@ -6,13 +6,11 @@
  *  PHP version 5.5.9
  */
 
-// Require the controller class
-//require '../App/Controllers/Posts.php';
-
 /**
- *  Routing
+ *  Twig
  */
-//require '../Core/Router.php';
+require_once dirname(__DIR__) . '/vendor/twig/twig/lib/Twig/Autoloader.php';
+Twig_Autoloader::register();
 
 /**
  *  Autoloader
