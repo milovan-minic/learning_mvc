@@ -37,4 +37,10 @@ class Config
      * @var string
      */
     const DB_PASSWORD = 'misa';
+
+    /**
+     *  Show or hide error messages on screen
+     * @var boolean
+     */
+    const SHOW_ERRORS = true;
 }
