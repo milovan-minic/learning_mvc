@@ -23,26 +23,16 @@ abstract class Model
         static $db = null;
 
         if($db === null) {
-//            $host = 'localhost';
-//            $dbName = 'learning_mvc';
-//            $username = 'root';
-//            $password = 'misa';
+            $dsn =  'mysql:host=' . Config::DB_HOST .
+                    ';dbname=' . Config::DB_NAME .
+                    ';charset=utf8';
 
-            try{
-//                $db = new PDO("mysql:host=$host;dbname=$dbName;charset=utf8",
-//                                $username, $password);
+            $db = new PDO($dsn, Config::DB_USERNAME, Config::DB_PASSWORD);
 
-                $dsn =  'mysql:host=' . Config::DB_HOST .
-                        ';dbname=' . Config::DB_NAME .
-                        ';charset=utf8';
+            // Throw an exception when an error occurs
+            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                $db = new PDO($dsn, Config::DB_USERNAME, Config::DB_PASSWORD);
-
-                return $db;
-
-            } catch(PDOException $e){
-                echo $e->getMessage();
-            }
+            return $db;
         }
     }
 }

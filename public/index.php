@@ -23,9 +23,16 @@ spl_autoload_register(function($class) {
     }
 });
 
-$router = new Core\Router();
+/**
+ *  Error and Exception handling
+ */
+set_error_handler('Core\Error::errorHandler');
+set_exception_handler('Core\Error::exceptionHandler');
 
-//echo get_class($router);
+/**
+ *  Routing
+ */
+$router = new Core\Router();
 
 // Add the routes
 $router->add('', ['controller' => 'Home', 'action' => 'index']);

@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use \Exception;
+
 /**
  *  View
  *
@@ -15,6 +17,8 @@ class View
      *
      * @param string $view The view file
      *
+     * @throws Exception
+     *
      * @return void
      */
     public static function render($view, $args = [])
@@ -26,7 +30,7 @@ class View
         if(is_readable($file)){
             require $file;
         } else {
-            echo "$file not found";
+            throw new Exception("$file not found");
         }
     }
 
