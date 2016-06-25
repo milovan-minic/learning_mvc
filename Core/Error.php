@@ -39,6 +39,13 @@ class Error
 
     public static function exceptionHandler($exception)
     {
+        // Code is 404 (not found) or 500 (general error)
+        $code = $exception->getCode();
+        if($code != 404) {
+            $code = 500;
+        }
+        http_response_code($code);
+
         if (Config::SHOW_ERRORS) {
             echo '<h1>Fatal error</h1>';
             echo '<p>Uncaught exception: \'' . get_class($exception) . '\'</p>';
@@ -47,7 +54,7 @@ class Error
             echo '<p>Thrown in  \'' . $exception->getFile() . '\' on line ' .
                 $exception->getLine() . '\'</p>';
         } else {
-            $log = dirname(__DIR__) . '/logs/' . 'ErrorLog_' . date('Y-m-d') . '.txt';
+            $log = dirname(__DIR__) . '/logs/ErrorLog_' . date('Y-m-d') . '.txt';
             ini_set('error_log', $log);
 
             $message = 'Uncaught exception: \'' . get_class($exception) . '\'';
@@ -58,7 +65,14 @@ class Error
 
             error_log($message); // TODO: Check why custom error file is not created
 
-            echo '<h1>An error occurred!</h1>';
+//            if($code == 404) {
+//                echo '<h1>Page not found</h1>';
+//            } else {
+//                echo '<h1>An error occured</h1>';
+//            }
+                View::renderTemplate("$code.html");
+
+//            echo '<h1>An error occurred!</h1>';
         }
     }
 }
